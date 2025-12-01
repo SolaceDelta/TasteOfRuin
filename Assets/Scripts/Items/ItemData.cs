@@ -15,6 +15,8 @@ public class ItemData : ScriptableObject
     public float attack;
     public float defense;
     public float speed;
+    [Header("Defense Pierce")]
+    public bool defPierce;
 
     [Header("Critical Hit")]
     public float critChance;
@@ -36,12 +38,17 @@ public class ItemData : ScriptableObject
     public float mintDMG;
     public int mintDuration;
 
-    [Header("Defense Pierce")]
-    public bool defPierce;
-
     [Header("Multipliers")]
-    public float damageMult = 1f;
-    public float speedMult = 1f;
+    public float damageMult;
+    public float speedMult;
+
+    [Header("Econs")]
+    [Header("Coins")]
+    public int coins;
+    public float coinGain;
+    [Header("Shards")]
+    public int shards;
+    public float shardGain;
 
     public override string ToString()
     { 
@@ -58,9 +65,30 @@ public class ItemData : ScriptableObject
         s += $"    Speed: {speed}\n";
         s += $"    Crit Chance: {critChance}\n";
         s += $"    Crit Damage: {critDamage}\n";
+        s += $"    Defense Pierce: {defPierce}\n";
+        s += "Conditions\n";
+        s += "    Sour\n";
+        s += $"        Sour Chance: {sourChance}\n";
+        s += $"        Sour Damage: {sourDMG}\n";
+        s += $"        Sour Duration: {sourDuration}\n";
+        s += "    Spice\n";
+        s += $"        Spice Chance: {spiceChance}\n";
+        s += $"        Spice Damage: {spiceDMG}\n";
+        s += $"        Spice Duration: {spiceDuration}\n";
+        s += "    Mint\n";
+        s += $"        Mint Chance: {mintChance}\n";
+        s += $"        Mint Damage: {mintDMG}\n";
+        s += $"        Mint Duration: {mintDuration}\n";
         s += "Multipliers:\n";
         s += $"    Damage: {damageMult}\n";
         s += $"    Speed: {speedMult}";
+        s += "Economies\n";
+        s += "    Coins\n";
+        s += $"        Coins: {coins}\n";
+        s += $"        Coin Gain: {coinGain}\n";
+        s += "    Shards\n";
+        s += $"        Shards: {shards}\n";
+        s += $"        Shard Gain: {shardGain}\n";
         return s;
     }
 }

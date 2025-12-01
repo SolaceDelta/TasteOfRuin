@@ -5,7 +5,12 @@ public class MenuFunctions : MonoBehaviour
 {
     public void MoveToScene(string scene)
     {
-        if (SceneManager.GetActiveScene().name == "RunScene" && scene == "MainMenu") {GameObject.Find("Girl").GetComponent<PlayerController>().DisableUIControls();}
+        if (SceneManager.GetActiveScene().name == "RunScene" && scene == "MainMenu") 
+        {
+            GameObject girl = GameObject.Find("Girl");
+            girl.GetComponent<PlayerController>().DisableUIControls();
+            girl.GetComponent<AttributeController>().EndRun();
+        }
         SceneManager.LoadScene(scene);
     }
 

@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     private int atkCooldown  = 0;
     private bool facingRight = true;
     private float groundY, dir;
+    public float enemyBonus = 0.3f;
 
     void Start()
     {
@@ -28,12 +29,6 @@ public class EnemyController : MonoBehaviour
         player         = GameObject.Find("Girl");
         playerPos      = player.transform;
         playerCollider = player.GetComponent<CapsuleCollider2D>();
-    }
-
-    void Update()
-    {
-        Chase();
-        Attack();
     }
 
     private bool Grounded(Vector3 point)
@@ -62,8 +57,8 @@ public class EnemyController : MonoBehaviour
 
             FlipSprite();
         }
-        else
-            rb.linearVelocity = Vector2.zero;
+        else rb.linearVelocity = Vector2.zero;
+        Attack();
     }
 
     private void Attack()
@@ -85,6 +80,7 @@ public class EnemyController : MonoBehaviour
             transform.localScale = localScale;
         }
     }
-
+    public void Reward() {player.GetComponent<PlayerController>().Reward(enemyBonus);}
     void FixedUpdate() {if (atkCooldown > 0) atkCooldown--;}
+    void Update() {Chase();}
 }

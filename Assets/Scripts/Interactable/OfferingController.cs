@@ -36,10 +36,8 @@ public class OfferingController : MonoBehaviour
 
     private ItemData RandomShopItem()
     {
-        // choose random, ideally based on rarity
         int c = db.shopItems.Count;
-        if (db == null || c == 0)
-            return null;
+        if (db == null || c == 0) return null;
         return db.shopItems[Random.Range(0, c)];
     }
 }

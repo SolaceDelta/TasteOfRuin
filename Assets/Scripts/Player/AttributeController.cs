@@ -7,40 +7,96 @@ public class AttributeController : MonoBehaviour
     [System.Serializable]
     public class Attributes
     {
+        // Basic Attributes
         public float health;
         public float maxHealth;
-
         public float attack;
         public float defense;
         public float speed;
         public float jumpPower;
-        
+        // Defense Pierce
+        public bool defPierce;
+
+        // Critical Hit
         public float critChance;
         public float critDamage;
         
+        // Conditions
+        // Sour
         public float sourChance;
         public float sourDMG;
         public int sourDuration;
-        
+        // Spice
         public float spiceChance;
         public float spiceDMG;
         public int spiceDuration;
-        
+        // Mint
         public float mintChance;
         public float mintDMG;
         public int mintDuration;
         
+        // Multipliers
         public float damageMult;
         public float speedMult;
 
+        // Econs
+        // Coins
         public int coins;
         public float coinGain;
+        // Shards
         public int shards;
         public float shardGain;
+        // Experience
+        public int exp;
+        public int targetExp;
+        public int level;
 
-        public bool defPierce;
+        public float upgradePrice;
 
-        public int upgradePrice;
+        public void Add(ItemData id)
+        {
+            // Basic Attributes
+            maxHealth += id.maxHealth;
+            health += id.maxHealth;
+            attack += id.attack;
+            defense += id.defense;
+            speed += id.speed;
+            
+            // Critical Hit
+            critChance += id.critChance;
+            critDamage += id.critDamage;
+            
+            // Conditions
+            // Sour
+            sourChance += id.sourChance;
+            sourDMG += id.sourDMG;
+            sourDuration += id.sourDuration;
+            // Spice
+            spiceChance += id.spiceChance;
+            spiceDMG += id.spiceDMG;
+            spiceDuration += id.spiceDuration;
+            // Mint
+            mintChance += id.mintChance;
+            mintDMG += id.mintDMG;
+            mintDuration += id.mintDuration;
+            
+            // Multipliers
+            damageMult += id.damageMult;
+            speedMult += id.speedMult;
+
+            // Econs
+            // Coins
+            coins += id.coins;
+            coinGain += id.coinGain;
+            //Shards
+            shards += id.shards;
+            shardGain += id.shardGain;
+        }
+
+        public void GainCoins(int gained)
+        {
+            coins += gained;
+        }
 
         public Attributes Clone() {return (Attributes) this.MemberwiseClone();}
     }
@@ -49,6 +105,26 @@ public class AttributeController : MonoBehaviour
     {
         public Attributes PERSISTENT;
         public Attributes RUN;
+
+        public void LevelUp(int gained)
+        {
+            RUN.exp += gained;
+            PERSISTENT.exp += gained;
+            if (RUN.exp >= RUN.targetExp)
+            {
+                RUN.exp -= RUN.targetExp;
+                PERSISTENT.exp -= PERSISTENT.targetExp;
+                RUN.targetExp *= 2;
+                PERSISTENT.targetExp *= 2;
+                RUN.level++;
+                PERSISTENT.level++;
+            }
+        }
+        public void GainShards(int gained)
+        {
+            RUN.shards += gained;
+            PERSISTENT.shards += gained;
+        }
     }
 
     private string filePath;
@@ -64,9 +140,12 @@ public class AttributeController : MonoBehaviour
             Debug.Log("|ATTRIBUTES| No persistent data found, creating default attributes.");
             attr.PERSISTENT = PersistentAttr();
             SaveAttr();
-        }
-        EndRun();
-        BeginRun();
+        }/*
+        if (gameObject.name == "Girl")
+        {
+            EndRun();
+            BeginRun();
+        }*/
     }
 
     private Attributes PersistentAttr()
@@ -80,22 +159,15 @@ public class AttributeController : MonoBehaviour
             jumpPower = 12f,
             critChance = 0.01f,
             critDamage = 2f,
-            sourChance = 0f,
-            sourDMG = 0f,
-            sourDuration = 0,
-            spiceChance = 0f,
-            spiceDMG = 0f,
-            spiceDuration = 0,
-            mintChance = 0f,
-            mintDMG = 0f,
-            mintDuration = 0,
             damageMult = 1f,
             speedMult = 1f,
-            coinGain = 0f,
+            coinGain = 1.5f,
             shards = 0,
-            shardGain = 0f,
-            defPierce = false,
-            upgradePrice = 1
+            shardGain = 1.5f,
+            exp = 0,
+            targetExp= 125,
+            level = 0,
+            upgradePrice = 1f
         };
     }
 
@@ -134,64 +206,19 @@ public class AttributeController : MonoBehaviour
 
     public void LoadAttr()
     {
-        /*
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            attr = JsonUtility.FromJson<AttributeContainer>(json);
-        }
-        else
-        {
-            attr = new AttributeContainer();
-            SaveAttr();
-        }
-        */
-        attr = File.Exists(filePath) ? JsonUtility.FromJson<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();
-        SaveAttr();
+        //attr = File.Exists(filePath) ? JsonUtility.FromJson<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();
+        //SaveAttr();
+        attr = File.Exists(filePath) ? JsonConvert.DeserializeObject<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();
     }
 
     public void ApplyItem(ItemData id)
     {
-        // Basic Attributes
-        if (id.maxHealth != -1)
-        {
-            attr.RUN.maxHealth += id.maxHealth;
-            attr.RUN.health += id.maxHealth;
-        }
-
-        if (id.attack != -1)  attr.RUN.attack += id.attack;
-        if (id.defense != -1) attr.RUN.defense += id.defense;
-        if (id.speed != -1)   attr.RUN.speed += id.speed;
-        
-        // Critical Hit
-        if (id.critChance != -1) attr.RUN.critChance += id.critChance;
-        if (id.critDamage != -1) attr.RUN.critDamage += id.critDamage;
-        
-        // Conditions
-        // Sour
-        if (id.sourChance != -1)   attr.RUN.sourChance += id.sourChance;
-        if (id.sourDMG != -1)      attr.RUN.sourDMG += id.sourDMG;
-        if (id.sourDuration != -1) attr.RUN.sourDuration += id.sourDuration;
-        // Spice
-        if (id.spiceChance != -1)   attr.RUN.spiceChance += id.spiceChance;
-        if (id.spiceDMG != -1)      attr.RUN.spiceDMG += id.spiceDMG;
-        if (id.spiceDuration != -1) attr.RUN.spiceDuration += id.spiceDuration;
-        // Mint
-        if (id.mintChance != -1)   attr.RUN.mintChance += id.mintChance;
-        if (id.mintDMG != -1)      attr.RUN.mintDMG += id.mintDMG;
-        if (id.mintDuration != -1) attr.RUN.mintDuration += id.mintDuration;
-        
-        // Defense Pierce
-        if (id.defPierce) attr.RUN.defPierce = true;
-
-        // Multipliers
-        if (id.damageMult != -1) attr.RUN.damageMult += id.damageMult;
-        if (id.speedMult != -1)  attr.RUN.speedMult += id.speedMult;
-        
+        attr.RUN.Add(id);
         SaveAttr();
         Debug.Log($"|ATTRIBUTES| Applied item {id.displayName} to player.");
     }
 
-    public void SaveAttr() {File.WriteAllText(filePath, JsonUtility.ToJson(attr, true));}
-    private void PrintJson() {Debug.Log(JsonUtility.ToJson(attr, true));}
+    //public void SaveAttr() {File.WriteAllText(filePath, JsonUtility.ToJson(attr, true));}
+    public void SaveAttr() {File.WriteAllText(filePath, JsonConvert.SerializeObject(attr, Formatting.Indented, new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore}));}
+    public void PrintJson() {Debug.Log(JsonUtility.ToJson(attr, true));}
 }

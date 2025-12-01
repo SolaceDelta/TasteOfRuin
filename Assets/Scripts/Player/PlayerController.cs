@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         uiMap    = controls.UI;
         pMap     = controls.Player;
         move     = pMap.FindAction("Move");
-
+        
         pauseMenu = GameObject.Find("Pause_Menu");
         pauseMenu.SetActive(paused);
     }
@@ -54,13 +54,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(hIn * (attr.attr.RUN.speed * attr.attr.RUN.speedMult), rb.linearVelocity.y);
-        if (atkCooldown > 0) 
-            atkCooldown--;
-    }
-
-    private bool Grounded()
-    {
-        return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer); // USE RAYCAST INSTEAD.
+        if (atkCooldown > 0) atkCooldown--;
     }
 
     private void FlipSprite()
@@ -72,12 +66,6 @@ public class PlayerController : MonoBehaviour
             localScale.x        *= -1f;
             transform.localScale = localScale;
         }
-    }
-
-    private void OnJump()
-    {
-        if (Grounded() && !paused)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);
     }
 
     private void OnAttack()
@@ -139,15 +127,22 @@ public class PlayerController : MonoBehaviour
     {
         float min = 0.5f * attr.attr.RUN.attack;
         float max = 1.5f * attr.attr.RUN.attack;
-        if (Crit())
-            return (Mathf.Round(Random.Range(min, max) * 100f) / 100f) * attr.attr.RUN.damageMult * attr.attr.RUN.critDamage;
-        else
-            return (Mathf.Round(Random.Range(min, max) * 100f) / 100f) * attr.attr.RUN.damageMult;
+        if (Crit()) return (Mathf.Round(Random.Range(min, max) * 100f) / 100f) * attr.attr.RUN.damageMult * attr.attr.RUN.critDamage;
+        else return (Mathf.Round(Random.Range(min, max) * 100f) / 100f) * attr.attr.RUN.damageMult;
     }
 
-    private void OnEnable() {pMap.Enable();}
-    private void OnDisable() {pMap.Disable();}
+    public void Reward(float enemyBonus)
+    {
+        attr.attr.RUN.GainCoins((int) ((attr.attr.RUN.coinGain + enemyBonus) * Random.Range(0, 10) + attr.attr.RUN.level));
+        attr.attr.GainShards((int) ((attr.attr.RUN.shardGain + enemyBonus) * Random.Range(1, 3) + attr.attr.RUN.level));
+        attr.attr.LevelUp((int) (attr.attr.RUN.level + enemyBonus) * Random.Range(1, 25));
+    }
+
+    private void OnJump() {if (Grounded() && !paused) rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);}
     private bool Crit() {return (Mathf.Round(Random.Range(0f, 1f) * 100f) / 100f) < attr.attr.RUN.critChance;}
-    public bool IsFacingRight() {return facingRight;}
+    private bool Grounded() {return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer);}
     public void DisableUIControls() {uiMap.Disable();}
+    public bool IsFacingRight() {return facingRight;}
+    private void OnDisable() {pMap.Disable();}
+    private void OnEnable() {pMap.Enable();}
 }

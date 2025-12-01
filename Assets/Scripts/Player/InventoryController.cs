@@ -34,14 +34,12 @@ public class InventoryController : MonoBehaviour
             }
             attr.ApplyItem(i);
         }
-        else
-            Debug.LogError("|ERROR| Cannot add null as an item!");
+        else Debug.LogError("|ERROR| Cannot add null as an item!");
     }
 
     private void LogInv((ItemData i, int c) log)
     {
         Debug.Log($"|INVENTORY| Added {log.i.displayName}");
-        foreach ((ItemData item, int count) id in inventory)
-            Debug.Log(id.item.ToString() + $"\n{id.count}");
+        foreach ((ItemData item, int count) id in inventory) Debug.Log(id.item.ToString() + $"\n{id.count}");
     }
 }

@@ -2107,6 +2107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445212861613482497}
   - component: {fileID: 5561957187528774216}
+  - component: {fileID: 6745772853073101600}
   m_Layer: 5
   m_Name: UpgradeManger
   m_TagString: Untagged
@@ -2142,9 +2143,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7088367989303117986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5c971f0637ca7428887ca5e912f440, type: 3}
+  m_Script: {fileID: 11500000, guid: d7253ff8677b2334a982d8dc4b7f1a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpdateManager
+--- !u!114 &6745772853073101600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088367989303117986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f076f5857dda0164db31ce9c5ca18ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttributeController
 --- !u!1 &7193711171151914464
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,17 +17,15 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private int sourTime = 0, spiceTime = 0, mintTime = 0;
     private const int sourInterval = 60, spiceInterval = 30, mintInterval = 150;
     private int timeSinceSour = 0, timeSinceSpice = 0, timeSinceMint = 0;
+
+    private EnemyController ec;
     
     private const string condErr = "|ERROR| RemoveCondition called on inactive condition: ";
 
     void Start()
     {
+        ec = gameObject.GetComponent<EnemyController>();
         HealthToBar();
-    }
-
-    void Update()
-    {
-        HandleConditions();
     }
 
     public void Damage(float dmg, bool defPierce, Condition[] conditions)
@@ -37,16 +35,11 @@ public class EnemyHealth : MonoBehaviour
             Debug.LogError("|ERROR| Negative or zero damage");
             return;
         }
-        if (!defPierce)
-            dmg -= defense;
-
+        if (!defPierce) dmg -= defense;
         hp -= dmg;
 
-        foreach (Condition c in conditions)
-            SetCondition(c);
-
-        if (hp <= 0)
-            Die();
+        foreach (Condition c in conditions) SetCondition(c);
+        if (hp <= 0) Die();
     }
 
     public void Heal(float health)
@@ -57,37 +50,34 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
 
-        if (hp + health > maxHP)
-            hp = maxHP;
-        else
-            hp += health;
+        hp = hp + health > maxHP ? maxHP : hp + health;
+        //if (hp + health > maxHP) hp = maxHP;
+        //else hp += health;
     }
 
     public void SetCondition(Condition c)
     {
         if (ApplyCondition(c.chance))
         {
-            switch (c.cond)
+            if (c.cond == "sour")
             {
-                case "sour":
-                    sour = true;
-                    sourDMG = c.dmg;
-                    sourTime = c.duration;
-                    break;
-                case "spice":
-                    spice = true;
-                    spiceDMG = c.dmg;
-                    spiceTime = c.duration;
-                    break;
-                case "mint":
-                    mint = true;
-                    mintDMG = c.dmg;
-                    mintTime = c.duration;
-                    break;
-                default:
-                    Debug.LogError("|ERROR| Unrecognized condition: " + c.cond);
-                    break;
+                sour = true;
+                sourDMG = c.dmg;
+                sourTime = c.duration;
             }
+            else if (c.cond == "spice")
+            {
+                spice = true;
+                spiceDMG = c.dmg;
+                spiceTime = c.duration;
+            }
+            else if (c.cond == "mint")
+            {
+                mint = true;
+                mintDMG = c.dmg;
+                mintTime = c.duration;
+            }
+            else Debug.LogError("|ERROR| Unrecognized condition: " + c.cond);
             Debug.Log($"|ENEMY_HEALTH| Set condition {c.cond} with duration: {c.duration} at {c.dmg} damage.");
         }        
     }
@@ -99,49 +89,47 @@ public class EnemyHealth : MonoBehaviour
             Debug.LogError("|ERROR| RemoveCondition called with no active conditions");
             return;
         }
-        switch (condition)
+        if (condition == "sour")
         {
-            case "sour":
-                if (!sour)
-                {
-                    Debug.LogError(condErr + condition);
-                    break;
-                }
+            if (!sour)
+            {
+                Debug.LogError(condErr + condition);
+                return;
+            }
 
-                sour = false;
-                sourDMG = 0f;
-                sourTime = 0;
-                break;
-            case "spice":
-                if (!spice)
-                {
-                    Debug.LogError(condErr + condition);
-                    break;
-                }
-
-                spice = false;
-                spiceDMG = 0f;
-                spiceTime = 0;
-                break;
-            case "mint":
-                if (!mint)
-                {
-                    Debug.LogError(condErr + condition);
-                    break;
-                }
-
-                mint = false;
-                mintDMG = 0f;
-                mintTime = 0;
-                break;
-            default:
-                Debug.LogError("|ERROR| Unrecognized condition: " + condition);
-                break;
+            sour = false;
+            sourDMG = 0f;
+            sourTime = 0;
         }
+        else if (condition == "spice")
+        {
+            if (!spice)
+            {
+                Debug.LogError(condErr + condition);
+                return;
+            }
+
+            spice = false;
+            spiceDMG = 0f;
+            spiceTime = 0;
+        }
+        else if (condition == "mint")
+        {
+            if (!mint)
+            {
+                Debug.LogError(condErr + condition);
+                return;
+            }
+
+            mint = false;
+            mintDMG = 0f;
+            mintTime = 0;
+        }
+        else Debug.LogError("|ERROR| Unrecognized condition: " + condition);
     }
 
     private void HealthToBar()
-    {return;}
+    {return;}//Return
 
     public struct Condition
     {
@@ -159,56 +147,44 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private bool ApplyCondition(float chance)
-    {
-        return (Mathf.Round(Random.Range(0f, 1f) * 100f) / 100f) < chance;
-    }
-
     private void HandleConditions()
     {
-        if (sour && sourTime == 0)
-            RemoveCondition("sour");
+        if (sour && sourTime == 0) RemoveCondition("sour");
         else if (sour && timeSinceSour >= sourInterval)
         {
             Damage(sourDMG, true, new Condition[] {});
             timeSinceSour = 0;
         }
-        else
-            timeSinceSour++;
+        else timeSinceSour++;
 
-        if (spice && spiceTime == 0)
-            RemoveCondition("spice");
+        if (spice && spiceTime == 0) RemoveCondition("spice");
         else if (spice && timeSinceSpice >= spiceInterval)
         {
             Damage(spiceDMG, true, new Condition[] {});
             timeSinceSpice = 0;
         }
-        else
-            timeSinceSpice++;
+        else timeSinceSpice++;
 
-        if (mint && mintTime == 0)
-            RemoveCondition("mint");
+        if (mint && mintTime == 0) RemoveCondition("mint");
         else if (mint && timeSinceMint >= mintInterval)
         {
             Damage(mintDMG, true, new Condition[] {});
             timeSinceMint = 0;
         }
-        else
-            timeSinceMint++;
+        else timeSinceMint++;
 
-        if (sourTime > 0)
-            sourTime--;
-
-        if (spiceTime > 0)
-            spiceTime--;
-
-        if (mintTime > 0)
-            mintTime--;
+        if (sourTime > 0) sourTime--;
+        if (spiceTime > 0) spiceTime--;
+        if (mintTime > 0) mintTime--;
     }
 
     private void Die()
     {
         //Create dead enemy prefab in scene
+        ec.Reward();
         Destroy(gameObject);
     }
+
+    private bool ApplyCondition(float chance) {return (Mathf.Round(Random.Range(0f, 1f) * 100f) / 100f) < chance;}
+    void Update() {HandleConditions();}
 }

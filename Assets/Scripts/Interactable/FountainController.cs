@@ -11,9 +11,5 @@ public class FountainController : MonoBehaviour
         Destroy(this);
     }
 
-    private float RollHealing()
-    {
-        //Base on level, max health, etc.
-        return Mathf.Round(Random.Range(5f, 50f) * 100f) / 100f;
-    }
+    private float RollHealing() {return Mathf.Round(Random.Range(5f, 50f) * 100f) / 100f;}
 }

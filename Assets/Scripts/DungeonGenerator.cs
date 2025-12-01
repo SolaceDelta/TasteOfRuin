@@ -90,13 +90,13 @@ public class DungeonGenerator : MonoBehaviour
         Instantiate(startingI, center, Quaternion.identity, dungeon);
         dDungeon[4, 4] = true;
         Instantiate(player, center + new Vector3(0f, 4f, 0f), Quaternion.identity);
+        GameObject.Find("Girl").GetComponent<AttributeController>().BeginRun();
         
         while (rooms < roomLimit.max)
         {
             if (rooms > roomLimit.min && boss && Random.Range(0, 25) == 0) break;
             int dirs = (rooms < roomLimit.min) ? Random.Range(1, 5) : Random.Range(0, 5);
-            if (dirs == 4)
-                validDirections.AddRange(directions);
+            if (dirs == 4) validDirections.AddRange(directions);
             else if (dirs == 3)
             {
                 List<int> idx = new List<int> {0, 1, 2, 3};
@@ -110,8 +110,7 @@ public class DungeonGenerator : MonoBehaviour
                 idx.RemoveAt(Random.Range(0, 3));
                 validDirections.AddRange(new List<string> {directions[idx[0]], directions[idx[1]]});
             }
-            else if (dirs == 1)
-                validDirections.Add(directions[Random.Range(0, 4)]);
+            else if (dirs == 1) validDirections.Add(directions[Random.Range(0, 4)]);
             // Reset for next loop, choose direction to move
             PlaceRooms();
             LoopCleanup();
@@ -140,12 +139,8 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[]
-                {
-                    (left,        (-1,  1)),
-                    (left + down, (-1, -1))
-                };
-                
+                var options = new[] {(left,        (-1,  1)), (left + down, (-1, -1))};
+
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
                     possibleRooms.Remove(bossChamber);
@@ -169,11 +164,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[]
-                {
-                    (left,         (-1, 1)),
-                    (Vector3.zero, ( 1, 1))
-                };
+                var options = new[] {(left,         (-1, 1)), (Vector3.zero, ( 1, 1))};
                 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -198,11 +189,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[]
-                {
-                    (Vector3.zero, (1,  1)),
-                    (down,         (1, -1))
-                };
+                var options = new[] {(Vector3.zero, (1,  1)), (down,         (1, -1))};
                 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -227,11 +214,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[]
-                {
-                    (left,         (-1,  1)),
-                    (Vector3.zero, ( 1,  1))
-                };
+                var options = new[] {(left,         (-1,  1)), (Vector3.zero, ( 1,  1))};
 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {

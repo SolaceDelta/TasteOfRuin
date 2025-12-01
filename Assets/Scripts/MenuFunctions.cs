@@ -8,7 +8,9 @@ public class MenuFunctions : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "RunScene" && scene == "MainMenu") 
         {
             GameObject girl = GameObject.Find("Girl");
-            girl.GetComponent<PlayerController>().DisableUIControls();
+            //girl.GetComponent<PlayerController>().DisableUIControls();
+            girl.GetComponent<PlayerController>().OnPause();
+            Cursor.visible = true;
             girl.GetComponent<AttributeController>().EndRun();
         }
         SceneManager.LoadScene(scene);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -22,8 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private float hIn;
 
-    private bool paused = false;
-    private GameObject pauseMenu;
+    private bool pMenu = false, iMenu = false, wMenu = false, lMenu = false;
+    private GameObject pauseMenu, itemMenu, winMenu, loseMenu;
 
     private void Awake()
     {
@@ -33,7 +34,13 @@ public class PlayerController : MonoBehaviour
         move     = pMap.FindAction("Move");
         
         pauseMenu = GameObject.Find("Pause_Menu");
-        pauseMenu.SetActive(paused);
+        pauseMenu.SetActive(pMenu);
+        itemMenu = GameObject.Find("Item_Menu");
+        itemMenu.SetActive(iMenu);
+        winMenu = GameObject.Find("Win_Menu");
+        winMenu.SetActive(wMenu);
+        loseMenu = GameObject.Find("Lose_Menu");
+        loseMenu.SetActive(lMenu);
     }
 
     void Start()
@@ -42,7 +49,7 @@ public class PlayerController : MonoBehaviour
         rb            = gameObject.GetComponent<Rigidbody2D>();
         groundChecker = transform.GetChild(0);
         actuator      = transform.GetChild(1);
-        Cursor.visible = paused;
+        Cursor.visible = pMenu;
     }
 
     void Update()
@@ -114,10 +121,10 @@ public class PlayerController : MonoBehaviour
     
     public void OnPause()
     {
-        paused = !paused;
-        Time.timeScale = Convert.ToInt32(!paused);
-        Cursor.visible = paused;
-        if (paused)
+        pMenu = !pMenu;
+        Time.timeScale = Convert.ToInt32(!pMenu);
+        Cursor.visible = pMenu;
+        if (pMenu)
         {
             pMap.Disable();
             uiMap.Enable();
@@ -127,7 +134,7 @@ public class PlayerController : MonoBehaviour
             uiMap.Disable();
             pMap.Enable();
         }
-        pauseMenu.SetActive(paused);
+        pauseMenu.SetActive(pMenu);
         EventSystem.current.SetSelectedGameObject(null);
     }
 
@@ -146,7 +153,71 @@ public class PlayerController : MonoBehaviour
         attr.LevelUp((int) (attr.attr.RUN.level + 1 + enemyBonus) * Random.Range(1, 25));
     }
 
-    private void OnJump() {if (Grounded() && !paused) rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);}
+    public void DisplayItem(ItemData id = null)
+    {
+        iMenu = !iMenu;
+        Time.timeScale = Convert.ToInt32(!iMenu);
+        Cursor.visible = iMenu;
+        if (iMenu)
+        {
+            pMap.Disable();
+            uiMap.Enable();
+        }
+        else
+        {
+            uiMap.Disable();
+            pMap.Enable();
+        }
+        itemMenu.SetActive(iMenu);
+        if (id != null) GameObject.Find("Take_Item_Button").GetComponent<Button>().onClick.AddListener(() => 
+        {
+            gameObject.GetComponent<InventoryController>().AddItem(id);
+            CloseItem();
+        });
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void CloseItem() {DisplayItem();}
+
+    public void Win()
+    {
+        wMenu = !wMenu;
+        Time.timeScale = Convert.ToInt32(!wMenu);
+        Cursor.visible = wMenu;
+        if (wMenu)
+        {
+            pMap.Disable();
+            uiMap.Enable();
+        }
+        else
+        {
+            uiMap.Disable();
+            pMap.Enable();
+        }
+        winMenu.SetActive(wMenu);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void Lose()
+    {
+        lMenu = !lMenu;
+        Time.timeScale = Convert.ToInt32(!lMenu);
+        Cursor.visible = lMenu;
+        if (lMenu)
+        {
+            pMap.Disable();
+            uiMap.Enable();
+        }
+        else
+        {
+            uiMap.Disable();
+            pMap.Enable();
+        }
+        loseMenu.SetActive(lMenu);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void OnJump() {if (Grounded() && !pMenu) rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);}
     private bool Crit() {return (Mathf.Round(Random.Range(0f, 1f) * 100f) / 100f) < attr.attr.RUN.critChance;}
     private bool Grounded() {return Physics2D.OverlapCircle(groundChecker.position, 0.2f, groundLayer);}
     public void DisableUIControls() {uiMap.Disable();}

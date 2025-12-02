@@ -3,15 +3,29 @@ using UnityEngine.SceneManagement;
 
 public class MenuFunctions : MonoBehaviour
 {
-    public void MoveToScene(string scene)
+    public void MoveToScene(string sceneStr)
     {
-        if (SceneManager.GetActiveScene().name == "RunScene" && scene == "MainMenu") 
+        string[] s  = sceneStr.Split(".");
+        string scene = s[0];
+        string menu = s[1];
+        if (menu == "pause" || menu == "win" || menu == "lose")
         {
             GameObject girl = GameObject.Find("Girl");
-            //girl.GetComponent<PlayerController>().DisableUIControls();
-            girl.GetComponent<PlayerController>().OnPause();
-            Cursor.visible = true;
-            girl.GetComponent<AttributeController>().EndRun();
+            if (menu == "pause")
+            {
+                girl.GetComponent<PlayerController>().OnPause();
+                girl.GetComponent<AttributeController>().EndRun();
+            }
+            else if (menu == "win") 
+            {
+                girl.GetComponent<PlayerController>().Win();
+                if (scene == "MainMenu") girl.GetComponent<AttributeController>().EndRun();
+            }
+            else if (menu == "lose")
+            {
+                girl.GetComponent<PlayerController>().Lose();
+                girl.GetComponent<AttributeController>().EndRun();
+            }
         }
         SceneManager.LoadScene(scene);
     }

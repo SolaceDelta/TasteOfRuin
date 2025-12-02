@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class InventoryController : MonoBehaviour
             attr.ApplyItem(i);
         }
         else Debug.LogError("|ERROR| Cannot add null as an item!");
+        GameObject button = GameObject.Find("Take_Item_Button");
+        if (button != null) button.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
     private void LogInv((ItemData i, int c) log)

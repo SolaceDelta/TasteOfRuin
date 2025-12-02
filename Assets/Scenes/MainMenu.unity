@@ -1170,6 +1170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727134355}
   - component: {fileID: 1727134356}
+  - component: {fileID: 1727134357}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -1204,6 +1205,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ab07208068e8d41b3a4169e29baa81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuFunctions
+--- !u!114 &1727134357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727134354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb3b4fc9444cba442ab49fc50f5573e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1849753489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1461,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: PlayOptions
+          m_StringArgument: PlayOptions.main
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &2142372013

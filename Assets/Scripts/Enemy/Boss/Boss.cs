@@ -69,7 +69,11 @@ public class Boss : MonoBehaviour
     {
         Destroy(layers[stage - 1]);
         stage--;
-        if (stage <= 0) Destroy(this);
-        hp = maxHP = LHP[stage - 1];
+        if (stage <= 0) 
+        {
+            player.GetComponent<PlayerController>().Win();
+            Destroy(this);
+        }
+        else hp = maxHP = LHP[stage - 1];
     }
 }

@@ -579,7 +579,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: UpgradeOptions
+          m_StringArgument: UpgradeOptions.playOptions
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1169354876
@@ -1119,7 +1119,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenu
+          m_StringArgument: MainMenu.playOptions
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1533664277
@@ -1812,7 +1812,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: RunScene
+          m_StringArgument: RunScene.playOptions
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &1895051126

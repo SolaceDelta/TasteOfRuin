@@ -37,10 +37,7 @@ public class Projectile : MonoBehaviour
             other.GetComponent<PlayerHealth>().Damage(LD[stage - 1], false, conds[stage - 1]);
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Ground") || other.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
+        else if (other.CompareTag("Ground") || other.CompareTag("Wall")) Destroy(gameObject);
     }
 
     void Update() {transform.position += (Vector3)(dir * LS[stage - 1] * Time.deltaTime);}

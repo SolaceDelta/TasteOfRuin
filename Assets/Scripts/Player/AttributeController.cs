@@ -144,12 +144,7 @@ public class AttributeController : MonoBehaviour
             Debug.Log("|ATTRIBUTES| No persistent data found, creating default attributes.");
             attr.PERSISTENT = PersistentAttr();
             SaveAttr();
-        }/*
-        if (gameObject.name == "Girl")
-        {
-            EndRun();
-            BeginRun();
-        }*/
+        }
     }
 
     private Attributes PersistentAttr()
@@ -182,14 +177,7 @@ public class AttributeController : MonoBehaviour
             Debug.LogError("|ERROR| Cannot begin run, persistent data missing!");
             return;
         }
-        if (attr.RUN != null)
-        {
-            Debug.LogError("|ERROR| Cannot begin run, existing run data!");
-            EndRun();
-            SceneManager.LoadScene("MainMenu");
-            Cursor.visible = true;
-            return;
-        }
+        if (attr.RUN != null) {return;}
 
         attr.RUN = attr.PERSISTENT.Clone();
         attr.RUN.health = attr.RUN.maxHealth;
@@ -209,13 +197,6 @@ public class AttributeController : MonoBehaviour
         attr.RUN = null;
         SaveAttr();
         Debug.Log("|ATTRIBUTES| Run entry removed.");
-    }
-
-    public void LoadAttr()
-    {
-        //attr = File.Exists(filePath) ? JsonUtility.FromJson<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();
-        //SaveAttr();
-        attr = File.Exists(filePath) ? JsonConvert.DeserializeObject<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();
     }
 
     public void ApplyItem(ItemData id)
@@ -243,7 +224,7 @@ public class AttributeController : MonoBehaviour
         SaveAttr();
     }
 
-    //public void SaveAttr() {File.WriteAllText(filePath, JsonUtility.ToJson(attr, true));}
     public void SaveAttr() {File.WriteAllText(filePath, JsonConvert.SerializeObject(attr, Formatting.Indented, new JsonSerializerSettings {NullValueHandling = NullValueHandling.Ignore}));}
+    public void LoadAttr() {attr = File.Exists(filePath) ? JsonConvert.DeserializeObject<AttributeContainer>(File.ReadAllText(filePath)) : new AttributeContainer();}
     public void PrintJson() {Debug.Log(JsonUtility.ToJson(attr, true));}
 }

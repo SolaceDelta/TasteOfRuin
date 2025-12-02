@@ -8,7 +8,7 @@ public class ChestController : MonoBehaviour
 
     public void Interact(GameObject player)
     {
-        player.GetComponent<InventoryController>().AddItem(RandomItem());
+        player.GetComponent<PlayerController>().DisplayItem(RandomItem());
         Destroy(gameObject.GetComponent<CircleCollider2D>());
         Destroy(this);
     }

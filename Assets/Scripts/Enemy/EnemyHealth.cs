@@ -51,8 +51,6 @@ public class EnemyHealth : MonoBehaviour
         }
 
         hp = hp + health > maxHP ? maxHP : hp + health;
-        //if (hp + health > maxHP) hp = maxHP;
-        //else hp += health;
     }
 
     public void SetCondition(PlayerHealth.Condition c)
@@ -164,7 +162,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        //Create dead enemy prefab in scene
         ec.Reward();
         Destroy(gameObject);
     }

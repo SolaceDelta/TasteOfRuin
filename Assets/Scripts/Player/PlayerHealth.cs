@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
         HealthToHUD();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleConditions();
         HealthToHUD();
@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
         attr.attr.RUN.health -= dmg > 0 ? dmg : 0;
         attr.SaveAttr();
         foreach (Condition c in conditions) SetCondition(c);
-        if (attr.attr.RUN.health <= 0) Die();
+        if (attr.attr.RUN.health <= 0) gameObject.GetComponent<PlayerController>().Lose();
     }
 
     public void Heal(float heal)
@@ -57,8 +57,6 @@ public class PlayerHealth : MonoBehaviour
 
         attr.attr.RUN.health = attr.attr.RUN.health + heal > attr.attr.RUN.maxHealth ? attr.attr.RUN.maxHealth : attr.attr.RUN.health + heal;
         attr.SaveAttr();
-        //if (attr.attr.RUN.health + heal > attr.attr.RUN.maxHealth) attr.attr.RUN.health = attr.attr.RUN.maxHealth;
-        //else attr.attr.RUN.health += heal;
     }
 
     public void SetCondition(Condition c)
@@ -209,12 +207,6 @@ public class PlayerHealth : MonoBehaviour
         if (spiceTime > 0) spiceTime--;
         if (mintTime > 0) mintTime--;
     }
-
-    private void Die()
-    {
-        //Implement death screen, replace char sprite w/ dead, halt char and enemy movement
-        Destroy(gameObject);
-    }
-
+    
     private bool ApplyCondition(float chance) {return (Mathf.Round(Random.Range(0f, 1f) * 100f) / 100f) < chance;}
 }

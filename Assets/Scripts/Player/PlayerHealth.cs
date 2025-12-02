@@ -18,6 +18,9 @@ public class PlayerHealth : MonoBehaviour
     public GameObject healthBar;
     private AttributeController attr;
 
+    private float oldAtk;
+    private float oldSpd;
+
     void Start()
     {
         attr = gameObject.GetComponent<AttributeController>();
@@ -38,8 +41,8 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
         if (!defPierce) dmg -= attr.attr.RUN.defense;
-        attr.attr.RUN.health -= dmg;
-
+        attr.attr.RUN.health -= dmg > 0 ? dmg : 0;
+        attr.SaveAttr();
         foreach (Condition c in conditions) SetCondition(c);
         if (attr.attr.RUN.health <= 0) Die();
     }
@@ -53,6 +56,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         attr.attr.RUN.health = attr.attr.RUN.health + heal > attr.attr.RUN.maxHealth ? attr.attr.RUN.maxHealth : attr.attr.RUN.health + heal;
+        attr.SaveAttr();
         //if (attr.attr.RUN.health + heal > attr.attr.RUN.maxHealth) attr.attr.RUN.health = attr.attr.RUN.maxHealth;
         //else attr.attr.RUN.health += heal;
     }
@@ -63,6 +67,12 @@ public class PlayerHealth : MonoBehaviour
         {
             if (c.cond == "sour")
             {
+                if (!sour)
+                {
+                    oldAtk = attr.attr.RUN.attack;
+                    attr.attr.RUN.attack *= 0.75f;
+                    attr.SaveAttr();
+                }
                 sour = true;
                 sourDMG = c.dmg;
                 sourTime = c.duration;
@@ -75,6 +85,12 @@ public class PlayerHealth : MonoBehaviour
             }
             else if (c.cond == "mint")
             {
+                if (!mint)
+                {
+                    oldSpd = attr.attr.RUN.speed;
+                    attr.attr.RUN.speed *= 0.25f;
+                    attr.SaveAttr();
+                }
                 mint = true;
                 mintDMG = c.dmg;
                 mintTime = c.duration;
@@ -102,6 +118,8 @@ public class PlayerHealth : MonoBehaviour
             sour = false;
             sourDMG = 0f;
             sourTime = 0;
+            attr.attr.RUN.attack = oldAtk;
+            attr.SaveAttr();
         }
         else if (condition == "spice")
         {
@@ -126,6 +144,8 @@ public class PlayerHealth : MonoBehaviour
             mint = false;
             mintDMG = 0f;
             mintTime = 0;
+            attr.attr.RUN.speed = oldSpd;
+            attr.SaveAttr();
         }
         else Debug.LogError("|ERROR| Unrecognized condition: " + condition);
     }

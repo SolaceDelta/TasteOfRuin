@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayer, enemyLayer, interactLayer;
+    [SerializeField] private LayerMask groundLayer, enemyLayer, interactLayer, bossLayer;
 
     private AttributeController attr;
     private PlayerControls controls;
@@ -71,20 +71,28 @@ public class PlayerController : MonoBehaviour
     private void OnAttack()
     {
         if (atkCooldown == 0)
+        {
+            PlayerHealth.Condition[] cond = new PlayerHealth.Condition[]
             {
-                //play animation
-                Collider2D[] hits = Physics2D.OverlapCircleAll(actuator.position, 1f, enemyLayer);
-                foreach (Collider2D hit in hits)
-                {
-                    Debug.Log(hit);
-                    // MAY BE BAD IF IT STARTS TO DAMAGE FOR A SECOND THEN REMOVES IT
-                    EnemyHealth.Condition c0 = new EnemyHealth.Condition("sour", attr.attr.RUN.sourChance, attr.attr.RUN.sourDMG, attr.attr.RUN.sourDuration);
-                    EnemyHealth.Condition c1 = new EnemyHealth.Condition("spice", attr.attr.RUN.spiceChance, attr.attr.RUN.spiceDMG, attr.attr.RUN.spiceDuration);
-                    EnemyHealth.Condition c2 = new EnemyHealth.Condition("sour", attr.attr.RUN.mintChance, attr.attr.RUN.mintDMG, attr.attr.RUN.mintDuration);
-                    hit.gameObject.GetComponent<EnemyHealth>().Damage(RollDamage(), attr.attr.RUN.defPierce, new EnemyHealth.Condition[] {c0, c1, c2});
-                }
-                atkCooldown = 30;
+                new PlayerHealth.Condition("sour", attr.attr.RUN.sourChance, attr.attr.RUN.sourDMG, attr.attr.RUN.sourDuration),
+                new PlayerHealth.Condition("spice", attr.attr.RUN.spiceChance, attr.attr.RUN.spiceDMG, attr.attr.RUN.spiceDuration),
+                new PlayerHealth.Condition("mint", attr.attr.RUN.mintChance, attr.attr.RUN.mintDMG, attr.attr.RUN.mintDuration),
+            };
+            //play animation
+            List<Collider2D> hits = new List<Collider2D>();
+            hits.AddRange(Physics2D.OverlapCircleAll(actuator.position, 1f, enemyLayer));
+            hits.AddRange(Physics2D.OverlapCircleAll(actuator.position, 1f, bossLayer));
+            foreach (Collider2D hit in hits)
+            {
+                Debug.Log(hit);
+                EnemyHealth eh = hit.gameObject.GetComponent<EnemyHealth>();
+                Boss b = hit.gameObject.GetComponentInParent<Boss>();
+                if (eh != null) eh.Damage(RollDamage(), attr.attr.RUN.defPierce, cond);
+                else if (b != null) b.Damage(RollDamage(), attr.attr.RUN.defPierce, cond);
+                else Debug.LogError($"|ERROR| Captured non-enemy, non-boss object in attack: {hit}");
+                atkCooldown = eh != null || b != null ? 30 : 0;
             }
+        }
     }
 
     private void OnInteract()
@@ -96,10 +104,10 @@ public class PlayerController : MonoBehaviour
             GameObject obj = hits[0].gameObject;
             Debug.Log($"|INTERACT| Detected: {hits.Length}\nInteracted: {obj.name}");
 
-            if (obj.name == "Fountain") {obj.GetComponent<FountainController>().Interact(gameObject);}
-            else if (obj.name == "Chest") {obj.GetComponent<ChestController>().Interact(gameObject);}
-            else if (obj.name == "Door") {obj.GetComponent<DoorController>().Interact(gameObject);}
-            else if (obj.name == "OfferPedestal") {obj.GetComponent<OfferingController>().Interact(gameObject);}
+            if (obj.name == "Fountain") obj.GetComponent<FountainController>().Interact(gameObject);
+            else if (obj.name == "Chest") obj.GetComponent<ChestController>().Interact(gameObject);
+            else if (obj.name == "Door") obj.GetComponent<DoorController>().Interact(gameObject);
+            else if (obj.name == "OfferPedestal") obj.GetComponent<OfferingController>().Interact(gameObject);
             else Debug.LogError("|ERROR| Non-Interactable GameObject on interactLayer");
         }
     }
@@ -133,9 +141,9 @@ public class PlayerController : MonoBehaviour
 
     public void Reward(float enemyBonus)
     {
-        attr.attr.RUN.GainCoins((int) ((attr.attr.RUN.coinGain + enemyBonus) * Random.Range(0, 10) + attr.attr.RUN.level));
-        attr.attr.GainShards((int) ((attr.attr.RUN.shardGain + enemyBonus) * Random.Range(1, 3) + attr.attr.RUN.level));
-        attr.attr.LevelUp((int) (attr.attr.RUN.level + enemyBonus) * Random.Range(1, 25));
+        attr.GainCoins((int) ((attr.attr.RUN.coinGain + enemyBonus) * Random.Range(0, 10) + attr.attr.RUN.level));
+        attr.GainShards((int) ((attr.attr.RUN.shardGain + enemyBonus) * Random.Range(1, 3) + attr.attr.RUN.level));
+        attr.LevelUp((int) (attr.attr.RUN.level + 1 + enemyBonus) * Random.Range(1, 25));
     }
 
     private void OnJump() {if (Grounded() && !paused) rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);}

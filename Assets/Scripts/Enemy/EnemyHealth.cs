@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
         HealthToBar();
     }
 
-    public void Damage(float dmg, bool defPierce, Condition[] conditions)
+    public void Damage(float dmg, bool defPierce, PlayerHealth.Condition[] conditions)
     {
         if (dmg <= 0)
         {
@@ -36,9 +36,9 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
         if (!defPierce) dmg -= defense;
-        hp -= dmg;
+        hp -= dmg > 0 ? dmg : 0;
 
-        foreach (Condition c in conditions) SetCondition(c);
+        foreach (PlayerHealth.Condition c in conditions) SetCondition(c);
         if (hp <= 0) Die();
     }
 
@@ -55,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
         //else hp += health;
     }
 
-    public void SetCondition(Condition c)
+    public void SetCondition(PlayerHealth.Condition c)
     {
         if (ApplyCondition(c.chance))
         {
@@ -131,28 +131,12 @@ public class EnemyHealth : MonoBehaviour
     private void HealthToBar()
     {return;}//Return
 
-    public struct Condition
-    {
-        public string cond;
-        public float chance;
-        public float dmg;
-        public int duration;
-
-        public Condition(string cond, float chance, float dmg, int duration)
-        {
-            this.cond = cond;
-            this.chance = chance;
-            this.dmg = dmg;
-            this.duration = duration;
-        }
-    }
-
     private void HandleConditions()
     {
         if (sour && sourTime == 0) RemoveCondition("sour");
         else if (sour && timeSinceSour >= sourInterval)
         {
-            Damage(sourDMG, true, new Condition[] {});
+            Damage(sourDMG, true, new PlayerHealth.Condition[] {});
             timeSinceSour = 0;
         }
         else timeSinceSour++;
@@ -160,7 +144,7 @@ public class EnemyHealth : MonoBehaviour
         if (spice && spiceTime == 0) RemoveCondition("spice");
         else if (spice && timeSinceSpice >= spiceInterval)
         {
-            Damage(spiceDMG, true, new Condition[] {});
+            Damage(spiceDMG, true, new PlayerHealth.Condition[] {});
             timeSinceSpice = 0;
         }
         else timeSinceSpice++;
@@ -168,7 +152,7 @@ public class EnemyHealth : MonoBehaviour
         if (mint && mintTime == 0) RemoveCondition("mint");
         else if (mint && timeSinceMint >= mintInterval)
         {
-            Damage(mintDMG, true, new Condition[] {});
+            Damage(mintDMG, true, new PlayerHealth.Condition[] {});
             timeSinceMint = 0;
         }
         else timeSinceMint++;

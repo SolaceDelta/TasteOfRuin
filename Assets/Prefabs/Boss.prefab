@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6647310183858901530}
   - component: {fileID: 5076930905530655336}
   - component: {fileID: 2750709238251098727}
-  - component: {fileID: 1426540603039706925}
-  m_Layer: 0
+  - component: {fileID: 3033813805734141153}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,13 +90,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1426540603039706925
-SphereCollider:
+--- !u!58 &3033813805734141153
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440657358349434627}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -105,12 +108,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &706173940459573631
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7459254259668713020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 575101486346370284}
   - component: {fileID: 1018158116521395078}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8519222579856408624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6735257220763564329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,8 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7292823184947527769}
-  - component: {fileID: 2994884469931737397}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,19 +347,6 @@ Transform:
   - {fileID: 8475518901625556462}
   m_Father: {fileID: 2449028673209606912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2994884469931737397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2192044805048813216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da689d7d329d8046bbddd485ec68ead, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossLayer9
-  projectile: {fileID: 4725313765599621089, guid: 577b67adf986e4f4d93c85a427246005, type: 3}
 --- !u!1 &2480885315406748123
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,8 +448,8 @@ GameObject:
   - component: {fileID: 8475518901625556462}
   - component: {fileID: 2636551823244969338}
   - component: {fileID: 415097120237238922}
-  - component: {fileID: 4345216323096419039}
-  m_Layer: 0
+  - component: {fileID: 456598627253262161}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -526,13 +527,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4345216323096419039
-SphereCollider:
+--- !u!58 &456598627253262161
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2492058141640957692}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -541,12 +545,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.49999997
 --- !u!1 &3071091314645710447
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526762171318283745}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 677270486571069326}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3678160154891370897}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +668,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2449028673209606912}
-  m_Layer: 0
+  - component: {fileID: 2998146996964803026}
+  m_Layer: 9
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -685,6 +702,38 @@ Transform:
   - {fileID: 2836319378389531970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2998146996964803026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4252739568691913417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da689d7d329d8046bbddd485ec68ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Boss
+  layers:
+  - {fileID: 706173940459573631}
+  - {fileID: 2169971917482204180}
+  - {fileID: 1220177225443710572}
+  - {fileID: 4981569778624452431}
+  - {fileID: 3071091314645710447}
+  - {fileID: 4252301463936227017}
+  - {fileID: 3356726512913344983}
+  - {fileID: 6210579218841410833}
+  - {fileID: 2192044805048813216}
+  projectiles:
+  - {fileID: 4725313765599621089, guid: cd9d20f540c494544b29bf3f92a34968, type: 3}
+  - {fileID: 4725313765599621089, guid: a4546397fb8362f408322cc62d6e9107, type: 3}
+  - {fileID: 4725313765599621089, guid: 816b446797961cb4290a5d29b85bf5dd, type: 3}
+  - {fileID: 4725313765599621089, guid: 43fd534cc4a19504b8457fbe3d2a0c41, type: 3}
+  - {fileID: 4725313765599621089, guid: d728e78742e3ed74bb708ccdcbdc8d83, type: 3}
+  - {fileID: 4725313765599621089, guid: 7398bbba321c953428766cfe4f5af00b, type: 3}
+  - {fileID: 4725313765599621089, guid: bd441dcc7b9e9c948af508aa8f2206ba, type: 3}
+  - {fileID: 4725313765599621089, guid: f6db7e2d6e606d748845578765e861f1, type: 3}
+  - {fileID: 4725313765599621089, guid: 577b67adf986e4f4d93c85a427246005, type: 3}
 --- !u!1 &4643969194508186004
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2929411572045677206}
   - component: {fileID: 2748649491514398261}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763063971202373597}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1049,7 @@ GameObject:
   - component: {fileID: 6899516256794155046}
   - component: {fileID: 8731057235867247786}
   - component: {fileID: 6804022245495075693}
-  - component: {fileID: 8358895180838434111}
+  - component: {fileID: 7657050402164609704}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -1079,13 +1128,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8358895180838434111
-SphereCollider:
+--- !u!58 &7657050402164609704
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5014900626723173296}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1094,12 +1146,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5720363916354094775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8093865746457175122}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Layer 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1191656684696061674}
   - component: {fileID: 4158361088129918740}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PupilL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1311,8 +1375,8 @@ GameObject:
   - component: {fileID: 3857259707665614189}
   - component: {fileID: 5346985376910381763}
   - component: {fileID: 6995918866583053062}
-  - component: {fileID: 4613949237302459690}
-  m_Layer: 0
+  - component: {fileID: 4712439105839179080}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1390,13 +1454,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4613949237302459690
-SphereCollider:
+--- !u!58 &4712439105839179080
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6700781872511709562}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1405,12 +1472,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.49999997
 --- !u!1 &6795766589117737124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,8 +1501,8 @@ GameObject:
   - component: {fileID: 5443373289670253614}
   - component: {fileID: 829447993674875602}
   - component: {fileID: 2363081126325089688}
-  - component: {fileID: 4269990159375329413}
-  m_Layer: 0
+  - component: {fileID: 685833120445580362}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,13 +1580,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4269990159375329413
-SphereCollider:
+--- !u!58 &685833120445580362
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6795766589117737124}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1516,12 +1598,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6873706692507166041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,8 +1808,8 @@ GameObject:
   - component: {fileID: 4436870927146915719}
   - component: {fileID: 7981362542128004397}
   - component: {fileID: 4749363526387561187}
-  - component: {fileID: 4487601273529399268}
-  m_Layer: 0
+  - component: {fileID: 3021470509735627581}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1793,13 +1887,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4487601273529399268
-SphereCollider:
+--- !u!58 &3021470509735627581
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7325583555001103737}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1808,12 +1905,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.50000006
 --- !u!1 &7406291995202882260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,8 +1934,8 @@ GameObject:
   - component: {fileID: 8393258724164511824}
   - component: {fileID: 4382379518114422295}
   - component: {fileID: 5958992545842114187}
-  - component: {fileID: 5498360737239940749}
-  m_Layer: 0
+  - component: {fileID: 834176139607076935}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1904,13 +2013,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5498360737239940749
-SphereCollider:
+--- !u!58 &834176139607076935
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7406291995202882260}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1919,12 +2031,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7807739907427352364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1936,8 +2060,8 @@ GameObject:
   - component: {fileID: 517250121924996127}
   - component: {fileID: 7525222687659496532}
   - component: {fileID: 7728682782444157033}
-  - component: {fileID: 5332995665775207277}
-  m_Layer: 0
+  - component: {fileID: 5005218589178876736}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2015,13 +2139,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5332995665775207277
-SphereCollider:
+--- !u!58 &5005218589178876736
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7807739907427352364}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2030,12 +2157,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7886944518662497554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3209883218456869765}
   - component: {fileID: 238948169057886293}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2172,7 +2311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7429103348920369372}
   - component: {fileID: 3225718712790360491}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PupilR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2263,8 +2402,8 @@ GameObject:
   - component: {fileID: 772942554512145464}
   - component: {fileID: 2071247773437622437}
   - component: {fileID: 1957052583648378069}
-  - component: {fileID: 6858559309566996554}
-  m_Layer: 0
+  - component: {fileID: 6402943004922378772}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2342,13 +2481,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6858559309566996554
-SphereCollider:
+--- !u!58 &6402943004922378772
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8291925613029637463}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2357,12 +2499,24 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9141135271724726806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2374,8 +2528,8 @@ GameObject:
   - component: {fileID: 6518701601607263530}
   - component: {fileID: 1214078811140848824}
   - component: {fileID: 7625072290405511612}
-  - component: {fileID: 1367174763267528175}
-  m_Layer: 0
+  - component: {fileID: 4851637339683179365}
+  m_Layer: 9
   m_Name: Layer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2453,13 +2607,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1367174763267528175
-SphereCollider:
+--- !u!58 &4851637339683179365
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9141135271724726806}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2468,9 +2625,21 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

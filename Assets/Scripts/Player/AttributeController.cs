@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 
 public class AttributeController : MonoBehaviour
@@ -96,6 +97,7 @@ public class AttributeController : MonoBehaviour
         public void GainCoins(int gained)
         {
             coins += gained;
+            Debug.Log($"|ATTRIBUTES| GainCoins Ran >\n\tGained Coins: {gained}\n\tCurrent Coins: {coins}");
         }
 
         public Attributes Clone() {return (Attributes) this.MemberwiseClone();}
@@ -119,11 +121,13 @@ public class AttributeController : MonoBehaviour
                 RUN.level++;
                 PERSISTENT.level++;
             }
+            Debug.Log($"|ATTRIBUTES| LevelUp Ran >\n\tGained Exp: {gained}\n\tCurrent Exp: {RUN.exp}\n\tCurrent Level: {RUN.level}");
         }
         public void GainShards(int gained)
         {
             RUN.shards += gained;
             PERSISTENT.shards += gained;
+            Debug.Log($"|ATTRIBUTES| GainShards Ran >\n\tGained Shards: {gained}\n\tCurrent Shards: {RUN.shards}");
         }
     }
 
@@ -181,6 +185,9 @@ public class AttributeController : MonoBehaviour
         if (attr.RUN != null)
         {
             Debug.LogError("|ERROR| Cannot begin run, existing run data!");
+            EndRun();
+            SceneManager.LoadScene("MainMenu");
+            Cursor.visible = true;
             return;
         }
 
@@ -216,6 +223,24 @@ public class AttributeController : MonoBehaviour
         attr.RUN.Add(id);
         SaveAttr();
         Debug.Log($"|ATTRIBUTES| Applied item {id.displayName} to player.");
+    }
+
+    public void GainCoins(int gained)
+    {
+        attr.RUN.GainCoins(gained);
+        SaveAttr();
+    }
+
+    public void LevelUp(int gained)
+    {
+        attr.LevelUp(gained);
+        SaveAttr();
+    }
+
+    public void GainShards(int gained)
+    {
+        attr.GainShards(gained);
+        SaveAttr();
     }
 
     //public void SaveAttr() {File.WriteAllText(filePath, JsonUtility.ToJson(attr, true));}

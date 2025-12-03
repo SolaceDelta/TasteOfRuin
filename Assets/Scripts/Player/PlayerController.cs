@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -122,18 +123,7 @@ public class PlayerController : MonoBehaviour
     public void OnPause()
     {
         pMenu = !pMenu;
-        Time.timeScale = Convert.ToInt32(!pMenu);
-        Cursor.visible = pMenu;
-        if (pMenu)
-        {
-            pMap.Disable();
-            uiMap.Enable();
-        }
-        else
-        {
-            uiMap.Disable();
-            pMap.Enable();
-        }
+        MenuHelper(pMenu);
         pauseMenu.SetActive(pMenu);
         EventSystem.current.SetSelectedGameObject(null);
     }
@@ -156,54 +146,38 @@ public class PlayerController : MonoBehaviour
     public void DisplayItem(ItemData id = null)
     {
         iMenu = !iMenu;
-        Time.timeScale = Convert.ToInt32(!iMenu);
-        Cursor.visible = iMenu;
-        if (iMenu)
-        {
-            pMap.Disable();
-            uiMap.Enable();
-        }
-        else
-        {
-            uiMap.Disable();
-            pMap.Enable();
-        }
+        MenuHelper(iMenu);
         itemMenu.SetActive(iMenu);
         if (id != null) GameObject.Find("Take_Item_Button").GetComponent<Button>().onClick.AddListener(() => 
         {
             gameObject.GetComponent<InventoryController>().AddItem(id);
             CloseItem();
         });
+        GameObject.Find("Item_Name").GetComponent<TextMeshPro>().text = id.displayName;
         EventSystem.current.SetSelectedGameObject(null);
     }
-
-    public void CloseItem() {DisplayItem();}
 
     public void Win()
     {
         wMenu = !wMenu;
-        Time.timeScale = Convert.ToInt32(!wMenu);
-        Cursor.visible = wMenu;
-        if (wMenu)
-        {
-            pMap.Disable();
-            uiMap.Enable();
-        }
-        else
-        {
-            uiMap.Disable();
-            pMap.Enable();
-        }
+        MenuHelper(wMenu);
         winMenu.SetActive(wMenu);
         EventSystem.current.SetSelectedGameObject(null);
     }
-
+// FIX SMELLY BAD
     public void Lose()
     {
         lMenu = !lMenu;
-        Time.timeScale = Convert.ToInt32(!lMenu);
-        Cursor.visible = lMenu;
-        if (lMenu)
+        MenuHelper(lMenu);
+        loseMenu.SetActive(lMenu);
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void MenuHelper(bool on)
+    {
+        Time.timeScale = Convert.ToInt32(!on);
+        Cursor.visible = on;
+        if (on)
         {
             pMap.Disable();
             uiMap.Enable();
@@ -213,8 +187,6 @@ public class PlayerController : MonoBehaviour
             uiMap.Disable();
             pMap.Enable();
         }
-        loseMenu.SetActive(lMenu);
-        EventSystem.current.SetSelectedGameObject(null);
     }
 
     private void OnJump() {if (Grounded() && !pMenu) rb.linearVelocity = new Vector2(rb.linearVelocity.x, attr.attr.RUN.jumpPower);}
@@ -224,4 +196,5 @@ public class PlayerController : MonoBehaviour
     public bool IsFacingRight() {return facingRight;}
     private void OnDisable() {pMap.Disable();}
     private void OnEnable() {pMap.Enable();}
+    public void CloseItem() {DisplayItem();}
 }

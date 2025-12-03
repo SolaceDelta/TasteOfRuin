@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82dc0c93e3872eb4fa968babcb6bb173, type: 3}
+  m_Name: MoltenSpiceTruffle
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: Molten Spice Truffle
+  rarity: Rare
+  description: A rich chocolate center hiding a dangerously spicy core. Handle with
+    caution!
+  price: 120
+  icon: {fileID: 0}
+  maxHealth: 10
+  attack: 7
+  defense: 1
+  speed: -1
+  defPierce: 0
+  critChance: 0.05
+  critDamage: 0.15
+  sourChance: 0
+  sourDMG: 0
+  sourDuration: 0
+  spiceChance: 0.4
+  spiceDMG: 6
+  spiceDuration: 400
+  mintChance: 0
+  mintDMG: 0
+  mintDuration: 0
+  damageMult: 0.12
+  speedMult: -0.05
+  coins: 2
+  coinGain: 0.05
+  shards: 0
+  shardGain: 0

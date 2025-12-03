@@ -13,8 +13,10 @@ public class EnemyController : MonoBehaviour
     private GameObject player;
     private Transform playerPos;
     private CapsuleCollider2D playerCollider;
+    private AttributeController attr;
 
     private int atkCooldown  = 0;
+    private int maxAC = 75;
     private bool facingRight = true;
     private float groundY, dir;
     public float enemyBonus = 0.3f;
@@ -29,6 +31,11 @@ public class EnemyController : MonoBehaviour
         player         = GameObject.Find("Girl");
         playerPos      = player.transform;
         playerCollider = player.GetComponent<CapsuleCollider2D>();
+        attr           = player.GetComponent<AttributeController>();
+        
+        strength += 2f * attr.attr.PERSISTENT.level;
+        speed += 0.25f * attr.attr.PERSISTENT.level;
+        maxAC -= (int) 0.05f * attr.attr.PERSISTENT.level;
     }
 
     private bool Grounded(Vector3 point)
@@ -66,7 +73,7 @@ public class EnemyController : MonoBehaviour
         if (col.IsTouching(playerCollider) && atkCooldown == 0)
         {
             player.GetComponent<PlayerHealth>().Damage(strength, false, new PlayerHealth.Condition[] {});
-            atkCooldown = 75;
+            atkCooldown = maxAC;
         }
     }
 

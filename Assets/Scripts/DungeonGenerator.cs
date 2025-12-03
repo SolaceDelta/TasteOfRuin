@@ -62,9 +62,9 @@ public class DungeonGenerator : MonoBehaviour
     };
     
     // Limits
-    private (int min, int max) shopLimit = (1, 2);
-    private (int min, int max) lootLimit = (2, 5);
-    private (int min, int max) healLimit = (1, 8);
+    private (int min, int max) shopLimit = (1, 4);
+    private (int min, int max) lootLimit = (4, 10);
+    private (int min, int max) healLimit = (3, 12);
     private (int min, int max) roomLimit = (18, 81);
     
     private List<string> directions = new List<string> {L, U, R, D};
@@ -88,13 +88,19 @@ public class DungeonGenerator : MonoBehaviour
         pointer = center;
 
         Instantiate(startingI, center, Quaternion.identity, dungeon);
-        dDungeon[4, 4] = true;
         Instantiate(player, center + new Vector3(0f, 4f, 0f), Quaternion.identity);
-        GameObject.Find("Girl").GetComponent<AttributeController>().BeginRun();
+        
+        dDungeon[4, 4] = true;
+        GameObject girl = GameObject.Find("Girl");
+        AttributeController attr = girl.GetComponent<AttributeController>();
+        int level = attr.attr.PERSISTENT.level;
+
+        LevelLimits(level);
+        attr.BeginRun();
         
         while (rooms < roomLimit.max)
         {
-            if (rooms > roomLimit.min && boss && Random.Range(0, 25) == 0) break;
+            if (MinimumMet() && Random.Range(0, 25) == 0) break;
             int dirs = (rooms < roomLimit.min) ? Random.Range(1, 5) : Random.Range(0, 5);
             if (dirs == 4) validDirections.AddRange(directions);
             else if (dirs == 3)
@@ -278,7 +284,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         rooms++;
 
-        if (rooms >= roomLimit.min && boss == false && !possibleRooms.Contains(bossChamber)) possibleRooms.Add(bossChamber);
+        if (rooms >= roomLimit.min && !boss && !possibleRooms.Contains(bossChamber)) possibleRooms.Add(bossChamber);
         return room;
     }
 
@@ -399,8 +405,22 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    private void LevelLimits(int l)
+    {
+        int ten    = (int) (l * 0.1); // Every 10 levels 4 40
+        int twenty = (int) (l * 0.2); // Every 5 levels 10 50
+        int fifty  = (int) (l * 0.5); // Every 2 levels 12 6
+        shopLimit.min = Mathf.Max(0, shopLimit.min - ten);
+        shopLimit.max = Mathf.Max(1, shopLimit.max - ten);
+        lootLimit.min = Mathf.Max(0, lootLimit.min - twenty);
+        lootLimit.max = Mathf.Max(1, lootLimit.max - twenty);
+        healLimit.min = Mathf.Max(0, healLimit.min - fifty);
+        healLimit.max = Mathf.Max(1, healLimit.max - fifty);
+        roomLimit.min = Mathf.Min(roomLimit.max, roomLimit.min + fifty);
+    }
+    private bool AreaFree(int x, int x1, int y, int y1) {return CellInBounds(x1, y1) && !dDungeon[x1, y] && !dDungeon[x, y1] && !dDungeon[x1, y1];}
+    private bool MinimumMet() {return rooms >= roomLimit.min && shops >= shopLimit.min && loots >= lootLimit.min && heals >= healLimit.min && boss;}
     private (int, int) ConvertCoords(Vector3 coords) {return (4 + (int)(coords.x - center.x) / 25, 4 + (int)(coords.y - center.y) / 25);}
     private Vector3 ConvertTransform(int x, int y) {return center + new Vector3((float)(x - 4) * 25, (float)(y - 4) * 25, 0f);}
-    private bool AreaFree(int x, int x1, int y, int y1) {return CellInBounds(x1, y1) && !dDungeon[x1, y] && !dDungeon[x, y1] && !dDungeon[x1, y1];}
     private bool CellInBounds(int x, int y) {return x <= 8 && x >= 0 && y <= 8 && y >= 0;}
 }

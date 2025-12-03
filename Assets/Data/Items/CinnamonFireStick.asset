@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82dc0c93e3872eb4fa968babcb6bb173, type: 3}
+  m_Name: CinnamonFireStick
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  displayName: Cinnamon Fire Stick
+  rarity: Common
+  description: A classic red candy that burns your mouth and your enemies.
+  price: 25
+  icon: {fileID: 0}
+  maxHealth: 0
+  attack: 4
+  defense: 0
+  speed: 1
+  defPierce: 0
+  critChance: 0.01
+  critDamage: 0.1
+  sourChance: 0
+  sourDMG: 0
+  sourDuration: 0
+  spiceChance: 0.25
+  spiceDMG: 3
+  spiceDuration: 200
+  mintChance: 0
+  mintDMG: 0
+  mintDuration: 0
+  damageMult: 0.03
+  speedMult: 0
+  coins: 0
+  coinGain: 0
+  shards: 0
+  shardGain: 0

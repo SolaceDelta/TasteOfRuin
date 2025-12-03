@@ -7,8 +7,8 @@ using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private float hp = 100.0f;
-    private const float maxHP = 100.0f;
+    [SerializeField] private float hp = 100f;
+    private float maxHP = 100f;
 
     [SerializeField] private float defense = 0f;
 
@@ -19,11 +19,15 @@ public class EnemyHealth : MonoBehaviour
     private int timeSinceSour = 0, timeSinceSpice = 0, timeSinceMint = 0;
 
     private EnemyController ec;
+    private AttributeController attr;
     
     private const string condErr = "|ERROR| RemoveCondition called on inactive condition: ";
 
     void Start()
     {
+        attr = GameObject.Find("Girl").GetComponent<AttributeController>();
+        hp = maxHP = maxHP + 10f * attr.attr.PERSISTENT.level;
+        defense += 0.01f * attr.attr.PERSISTENT.level;
         ec = gameObject.GetComponent<EnemyController>();
         HealthToBar();
     }

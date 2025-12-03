@@ -15,6 +15,5 @@ public class NotEnoughShards : MonoBehaviour
     {
         on = !on;
         nes.SetActive(on);
-        //EventSystem.current.SetSelectedGameObject(null);
     }
 }

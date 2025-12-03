@@ -3,21 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
-    //private const float L9HP = 2500f, L8HP = 1500f, L7HP = 1000f, L6HP = 750f, L5HP = 500f, L4HP = 350f, L3HP = 250f, L2HP = 150f, L1HP = 100f;
-    private readonly float[] LHP = {100f, 150f, 250f, 350f, 500f, 750f, 450f, 450f, 450f};
-    //private const int L9AC = 50, L8AC, = 75, L7AC = 100, L6AC = 125, L5AC = 150, L4AC = 175, L3AC = 200, L2AC = 50, L1AC = 25;
+    private readonly float[] LHP = {100f, 150f, 250f, 350f, 500f, 750f, 1000f, 1500f, 2500f};
     private readonly int[] LAC = {25, 50, 200, 175, 150, 125, 100, 75, 50};
     private readonly float[] LDF = {10f, 15f, 20f, 25f, 30f, 35f, 40f, 45f, 50f};
-
-    //Normal
-    //Big Damage Ball
-    //Sour -- weakens damage
-    //Spice
-    //Mint
-    //Sour Mint
-    //Spice Mint
-    //Sour Spice Mint
-    //Fast Big Damage
+    
     [SerializeField] private GameObject[] layers;
     [SerializeField] private GameObject[] projectiles;
 

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class OfferingController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class OfferingController : MonoBehaviour
     {
         item = RandomShopItem();
         price = item.price;
+        transform.Find("PriceBacking").transform.Find("Price").GetComponent<TextMeshPro>().text = price.ToString();
     }
 
     public void Interact(GameObject player)
@@ -27,10 +29,6 @@ public class OfferingController : MonoBehaviour
             Destroy(transform.GetChild(2).gameObject);
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(this);
-        }
-        else
-        {
-            //Indicate lack of funds somehow
         }
     }
 

@@ -98,6 +98,14 @@ public class PlayerHealth : MonoBehaviour
         }     
     }
 
+    public void RemoveConditions()
+    {
+        if (sour) RemoveCondition("sour");
+        if (spice) RemoveCondition("spice");
+        if (mint) RemoveCondition("mint");
+        
+    }
+
     public void RemoveCondition(string condition)
     {
         if (!sour && !spice && !mint)

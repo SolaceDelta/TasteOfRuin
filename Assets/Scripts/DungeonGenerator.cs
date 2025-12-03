@@ -145,7 +145,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[] {(left,        (-1,  1)), (left + down, (-1, -1))};
+                var options = new[] {(left, (-1,  1)), (left + down, (-1, -1))};
 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -170,7 +170,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[] {(left,         (-1, 1)), (Vector3.zero, ( 1, 1))};
+                var options = new[] {(left, (-1, 1)), (Vector3.zero, ( 1, 1))};
                 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -195,7 +195,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[] {(Vector3.zero, (1,  1)), (down,         (1, -1))};
+                var options = new[] {(Vector3.zero, (1,  1)), (down, (1, -1))};
                 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -220,7 +220,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (room == bossChamber)
             {
-                var options = new[] {(left,         (-1,  1)), (Vector3.zero, ( 1,  1))};
+                var options = new[] {(left, (-1,  1)), (Vector3.zero, ( 1,  1))};
 
                 if (!TryPlaceBossChamber(loc, x, y, options))
                 {
@@ -407,9 +407,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private void LevelLimits(int l)
     {
-        int ten    = (int) (l * 0.1); // Every 10 levels 4 40
-        int twenty = (int) (l * 0.2); // Every 5 levels 10 50
-        int fifty  = (int) (l * 0.5); // Every 2 levels 12 6
+        int ten    = (int) (l * 0.1); // Every 10 levels
+        int twenty = (int) (l * 0.2); // Every 5 levels
+        int fifty  = (int) (l * 0.5); // Every 2 levels
         shopLimit.min = Mathf.Max(0, shopLimit.min - ten);
         shopLimit.max = Mathf.Max(1, shopLimit.max - ten);
         lootLimit.min = Mathf.Max(0, lootLimit.min - twenty);

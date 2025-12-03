@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
             gameObject.GetComponent<InventoryController>().AddItem(id);
             CloseItem();
         });
-        GameObject.Find("Item_Name").GetComponent<TextMeshPro>().text = id.displayName;
+        if (id != null) GameObject.Find("Item_Name").GetComponent<TextMeshPro>().text = id.displayName;
         EventSystem.current.SetSelectedGameObject(null);
     }
 
@@ -163,8 +163,9 @@ public class PlayerController : MonoBehaviour
         MenuHelper(wMenu);
         winMenu.SetActive(wMenu);
         EventSystem.current.SetSelectedGameObject(null);
+        gameObject.GetComponent<PlayerHealth>().RemoveConditions();
     }
-// FIX SMELLY BAD
+
     public void Lose()
     {
         lMenu = !lMenu;
